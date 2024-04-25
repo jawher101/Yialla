@@ -36,7 +36,7 @@ const InternalSideBarLeft = ({ open, setOpen, isMobileView, contentRef }) => {
 
   return (
     <div
-      className={`bg-white border-r-2 mt-[4.1rem] fixed top-0 left-0 h-screen ${
+      className={`bg-white border-r-2 mt-[4.1rem] fixed top-0 left-0 ${
         open && isMobileView
           ? "w-screen"
           : !open && isMobileView
@@ -47,11 +47,11 @@ const InternalSideBarLeft = ({ open, setOpen, isMobileView, contentRef }) => {
           ? "w-[19rem] "
           : null
       } duration-500 text-primary ${isMobileView && "fixed left-0"}`}
-      style={{ overflowY: "hidden" }}
+      style={{ overflowY: "hidden", height: "100vh" }}
     >
       <div
-        className="overflow-y-auto h-[55vh] md:h-full boor flex flex-col gap-4 px-4 pt-10 relative"
-        style={{ paddingRight: "16px" }} // Add padding to prevent content from being hidden behind scrollbar
+        className="flex flex-col gap-4 px-4 pt-10 overflow-y-scroll"
+        style={{ paddingRight: "16px", maxHeight: "calc(100vh - 4.1rem)" }} // Adjusted height to fit the responsive design
       >
         {menus?.map((menu, idx) => (
           <>
@@ -96,63 +96,6 @@ const InternalSideBarLeft = ({ open, setOpen, isMobileView, contentRef }) => {
             </Link>
           </>
         ))}
-        <div className="bg-black flex flex-col gap-4 w-[16rem] space-y-2 fixed bottom-5  ">
-          <Link
-            to="/setting"
-            className={`group flex text-sm font-medium p-2 hover:bg-gray-100`}
-          >
-            <div className="flex items-center justify-between w-full">
-              <div className="flex items-center gap-3.5">
-                <div>
-                  <RiSettings4Line size={20} color="050816" />
-                </div>
-                <h2
-                  style={{
-                    transitionDelay: `${8 + 3}00ms`,
-                  }}
-                  className={`whitespace-pre duration-500`}
-                >
-                  Setting
-                </h2>
-                <h2
-                  className={`${
-                    open && "hidden"
-                  } bg-white font-semibold whitespace-pre text-gray-900 rounded-md drop-shadow-lg px-0 py-0 w-0 overflow-hidden  `}
-                >
-                  Setting
-                </h2>
-              </div>
-            </div>
-          </Link>
-
-          <Link
-            to="/"
-            className={`group flex text-sm font-medium p-2 hover:bg-gray-100`}
-          >
-            <div className="flex items-center justify-between w-full">
-              <div className="flex items-center gap-3.5">
-                <div>
-                  <FiLogOut size={20} color="050816" />
-                </div>
-                <h2
-                  style={{
-                    transitionDelay: `${9 + 3}00ms`,
-                  }}
-                  className={`whitespace-pre duration-500`}
-                >
-                  Log out
-                </h2>
-                <h2
-                  className={`${
-                    open && "hidden"
-                  } bg-white font-semibold whitespace-pre text-gray-900 rounded-md drop-shadow-lg px-0 py-0 w-0 overflow-hidden  `}
-                >
-                  Log out
-                </h2>
-              </div>
-            </div>
-          </Link>
-        </div>
       </div>
     </div>
   );

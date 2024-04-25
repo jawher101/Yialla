@@ -1,11 +1,51 @@
 import { HiMenuAlt3, HiX } from "react-icons/hi";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { RiSettings4Line } from "react-icons/ri";
+import { FiLogOut } from "react-icons/fi";
 
-export default function NavBar({ openModal, setOpenModal, isLogedIn }) {
+export default function NavBar({
+  openModal,
+  setOpenModal,
+  isLogedIn,
+  setIsLogedIn,
+  colisRef,
+}) {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const navgate = useNavigate();
+  const profileRef = useRef();
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const logedOut = () => {
+    setIsDropdownOpen(false);
+    setIsLogedIn(false);
+    localStorage.clear();
+    navgate("/");
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        (profileRef.current && !profileRef.current.contains(event.target)) ||
+        (colisRef.current && !colisRef.current.contains(event.target))
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <div>
       <div className="pt-0 pr-0 pb-0 pl-0 mt-0 mr-0 mb-0 ml-0"></div>
@@ -59,6 +99,7 @@ export default function NavBar({ openModal, setOpenModal, isLogedIn }) {
                             />
                             <span
                               onClick={() => setOpenModal((prev) => !prev)}
+                              ref={colisRef}
                               className="cursor-pointer absolute right-0 h-full rounded-lg w-20"
                             >
                               <div className="h-full flex flex-col items-center justify-center">
@@ -104,13 +145,44 @@ export default function NavBar({ openModal, setOpenModal, isLogedIn }) {
                         </span>
                       </p>
                     </div>
-                    <div className="justify-center items-center flex relative">
+                    <div
+                      className="justify-center items-center flex relative cursor-pointer"
+                      onClick={toggleDropdown}
+                      ref={profileRef}
+                    >
                       <img
                         src="https://static01.nyt.com/images/2019/11/08/world/08quebec/08quebec-superJumbo.jpg"
                         className="object-cover btn- h-9 w-9 rounded-full mr-2 bg-gray-300"
                         alt=""
                       />
                       <p className="font-semibold text-sm">Marrie Currie</p>
+                      <KeyboardArrowDownRoundedIcon />
+                      {isDropdownOpen && (
+                        <div
+                          className="bg-white border shadow-md w-50 h-28 fixed z-60 top-16 right-5 rounded-lg"
+                          ref={profileRef}
+                        >
+                          <div className="flex flex-col justify-center items-center gap-4 p-3 h-full">
+                            <Link
+                              onClick={() => setIsDropdownOpen(false)}
+                              to="/setting"
+                              className="flex items-center justify-start w-full gap-4 px-4"
+                            >
+                              <RiSettings4Line size={20} color="050816" />
+
+                              <span>Setting</span>
+                            </Link>
+                            <div
+                              onClick={logedOut}
+                              className="flex items-center justify-start w-full gap-4 px-4"
+                            >
+                              <FiLogOut size={20} color="050816" />
+
+                              <span>Log Out</span>
+                            </div>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </>
                 ) : null}

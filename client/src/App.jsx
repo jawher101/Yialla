@@ -34,7 +34,8 @@ function App() {
   const [open, setOpen] = useState(true);
   const [openModal, setOpenModal] = useState(false);
   const contentRef = useRef(null);
-  const [isLogedIn, setIsLogedIn] = useState(false);
+  const [isLogedIn, setIsLogedIn] = useState(true);
+  const colisRef = useRef();
 
   useEffect(() => {
     const handleResize = () => {
@@ -54,15 +55,22 @@ function App() {
     };
   }, []);
 
-  const handleContentScroll = () => {
-    const sidebar = document.getElementById("sidebar");
-    if (sidebar && contentRef.current) {
-      sidebar.scrollTop = contentRef.current.scrollTop;
-    }
-  };
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (colisRef.current && !colisRef.current.contains(event.target)) {
+        setOpenModal(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
-    <div className="w-full h-screen  ">
+    <div className="w-full h-screen">
       <div className="flex flex-col">
         {isLogedIn && (
           <div className="w-full ">
@@ -70,6 +78,8 @@ function App() {
               openModal={openModal}
               setOpenModal={setOpenModal}
               isLogedIn={isLogedIn}
+              setIsLogedIn={setIsLogedIn}
+              colisRef={colisRef}
             />
           </div>
         )}
@@ -134,7 +144,10 @@ function App() {
         </div>
       )}
       {openModal && (
-        <div className="bg-white border shadow-md w-50 h-28 fixed z-60 top-16 right-80 rounded-lg">
+        <div
+          className="bg-white border shadow-md w-50 h-28 fixed z-60 top-16 right-80 rounded-lg"
+          ref={colisRef}
+        >
           <div className="flex flex-col justify-center items-center gap-4 p-3 h-full">
             <Link
               onClick={() => setOpenModal(false)}
