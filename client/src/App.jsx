@@ -34,7 +34,7 @@ function App() {
   const [open, setOpen] = useState(true);
   const [openModal, setOpenModal] = useState(false);
   const contentRef = useRef(null);
-  const [isLogedIn, setIsLogedIn] = useState(true);
+  const [isLogedIn, setIsLogedIn] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
