@@ -5,32 +5,7 @@ import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNone
 import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 import { useState } from "react";
 
-import { makeStyles } from "@mui/material";
-// import ArrowDropDownIcon from "@mui/icons/ArrowDropDown";
-
-const useStyles = makeStyles((theme) => ({
-  dropdownContent: {
-    position: "absolute",
-    top: "100%",
-    left: 0,
-    backgroundColor: "#fff",
-    border: "1px solid #ccc",
-    borderRadius: "4px",
-    padding: "8px",
-    zIndex: 1,
-  },
-  rotated: {
-    transform: "rotate(180deg)",
-  },
-}));
-
 export default function NavBar({ openModal, setOpenModal, isLogedIn }) {
-  const classes = useStyles();
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
   return (
     <div>
       <div className="pt-0 pr-0 pb-0 pl-0 mt-0 mr-0 mb-0 ml-0"></div>
@@ -136,16 +111,6 @@ export default function NavBar({ openModal, setOpenModal, isLogedIn }) {
                         alt=""
                       />
                       <p className="font-semibold text-sm">Marrie Currie</p>
-                      <ArrowDropDownIcon
-                        className={isDropdownOpen ? classes.rotated : null}
-                        onClick={toggleDropdown}
-                      />
-                      {isDropdownOpen && (
-                        <div className={classes.dropdownContent}>
-                          {/* Dropdown content goes here */}
-                          <p>Dropdown Content Here</p>
-                        </div>
-                      )}
                     </div>
                   </>
                 ) : null}
