@@ -17,44 +17,46 @@ import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalance
 import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import StickyNote2OutlinedIcon from "@mui/icons-material/StickyNote2Outlined";
+import MarkunreadMailboxOutlinedIcon from "@mui/icons-material/MarkunreadMailboxOutlined";
+import IosShareOutlinedIcon from "@mui/icons-material/IosShareOutlined";
 
 export const menus = [
   {
-    name: "dashboard",
+    name: "Dashboard",
     link: "/dashboard",
     icon: MdOutlineDashboard,
     title: "Generale",
   },
 
-  { name: "messages", link: "/messages", icon: FiMessageSquare },
+  { name: "Mes Livraisons", link: "/messages", icon: IosShareOutlinedIcon },
   {
-    name: "Notifications",
+    name: "Mes Annonces",
     link: "/notifications",
-    icon: NotificationsNoneOutlinedIcon,
+    icon: MarkunreadMailboxOutlinedIcon,
   },
   {
-    name: "AJOUTER UNE ANNONCE",
+    name: "Ajouter une annonce",
     link: "/ajouter-une-annonce",
     icon: AddIcon,
     title: "Mes outils",
   },
   {
-    name: "CRÉE UN TRAJET",
+    name: "Crée un trajet",
     link: "/ajouter-un-trajet",
     icon: AddRoadIcon,
   },
   {
-    name: "CHERCHER UN COLIS",
+    name: "Chercher un colis",
     link: "/chercher-un-colis",
     icon: ManageSearchIcon,
   },
   {
-    name: "CARNET D'ADRESSE",
+    name: "Carnet d'adresse",
     link: "/carnet-d-adresse",
     icon: StickyNote2OutlinedIcon,
   },
   {
-    name: "MES PAIEMENTS",
+    name: "Mes paiements ",
     link: "/payments",
     icon: AttachMoneyOutlinedIcon,
   },

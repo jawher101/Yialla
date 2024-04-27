@@ -21,7 +21,7 @@ function Carousel() {
       className="relative w-full "
       data-carousel="slide"
     >
-      <div className="relative h-[24vh] overflow-hidden rounded-lg shadow-md">
+      <div className="relative h-[24vh] overflow-hidden rounded-lg ">
         {[...Array(totalSlides)].map((_, index) => (
           <div
             key={index}
@@ -31,8 +31,10 @@ function Carousel() {
             data-carousel-item
           >
             <div className="absolute flex flex-col justify-center items-center w-full h-full">
-              <div className="bg-[#FF9800] rounded-lg w-full h-full flex flex-col justify-center items-center">
-                <p>Content for Slide {index + 1}</p>
+              <div className="bg-yellow-500 rounded-lg w-full h-full flex flex-col justify-center items-center">
+                <p className="text-white font-medium text-xl ">
+                  Contenu {index + 1}
+                </p>
               </div>
             </div>
           </div>
@@ -44,7 +46,7 @@ function Carousel() {
             key={index}
             type="button"
             className={`w-3 h-3 rounded-full ${
-              currentSlide === index ? "bg-yellow-400" : "bg-gray-50"
+              currentSlide === index ? "bg-yellow-400" : "bg-yellow-300"
             }`}
             aria-current={currentSlide === index}
             aria-label={`Slide ${index + 1}`}

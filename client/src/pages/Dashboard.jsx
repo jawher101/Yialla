@@ -54,7 +54,7 @@ const Dashboard = () => {
           </div>
           <div className="grid mx-auto  bg-white rounded-lg shadow-sm border border-gray-200 mt-5 mb-5">
             <div className="text-center">
-              <div className="w-full bordet-t-2">
+              <div className="w-full  bordet-t-2">
                 <MidumeCardLayout tabs={tabs} />
               </div>
             </div>

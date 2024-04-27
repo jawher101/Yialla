@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import FooterAuthDefault from "../components/FooterAuthDefault";
+import img from "../assets/1.jpeg";
 
 function Default(props) {
   const { maincard } = props;
@@ -25,15 +26,6 @@ function Default(props) {
             </div>
           </Link>
           {maincard}
-          <div className="fixed z-0 right-0 hidden h-full  md:block lg:w-[49vw] 2xl:w-[44vw] bg-yellow-400">
-            <div
-              className={`absolute flex h-full w-full items-end justify-centerbg-cover bg-center lg:rounded-bl-[120px] xl:rounded-bl-[200px]`}
-            >
-              <div className=" flex h-full w-full">
-                <div className="flex  w-full " />
-              </div>
-            </div>
-          </div>
         </div>
         <FooterAuthDefault />
       </div>
